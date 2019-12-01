@@ -1,0 +1,13 @@
+--- flite-2.1.0/main/Makefile	2019-06-25 05:48:25.000000000 +0930
++++ Makefile-new	2019-12-01 19:19:08.000000000 +1030
+@@ -152,8 +152,8 @@
+ 	done
+ 	$(INSTALL) -m 755 $(BINDIR)/flite_time $(DESTDIR)$(INSTALLBINDIR)
+ #       The libraries: static and shared (if built)
+-	cp -pd $(flite_LIBS_deps) $(DESTDIR)$(INSTALLLIBDIR)
++	cp -p $(flite_LIBS_deps) $(DESTDIR)$(INSTALLLIBDIR)
+ ifdef SHFLAGS
+-	cp -pd $(SHAREDLIBS) $(VERSIONSHAREDLIBS) $(DESTDIR)$(INSTALLLIBDIR)
++	cp -p $(SHAREDLIBS) $(VERSIONSHAREDLIBS) $(DESTDIR)$(INSTALLLIBDIR)
+ endif
+ 
