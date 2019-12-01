@@ -69,8 +69,11 @@ CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BASE_PATH="${CURRENT_PATH}/.."
 DIST_FILENAME="${BASE_PATH}/${FLITE_URL}"
 
-# Create the prefix directory if necessary
-install -d "${PREFIX}" || exit -1
+# Check prefix directory is writable
+if [ ! -w "${PREFIX}" ] ; then
+  echo "${PREFIX}: Mot writable"
+  exit 1
+fi
 
 # Ensure the distribution exists
 if [ ! -f "${DIST_FILENAME}"  ] ; then
@@ -80,7 +83,7 @@ if [ ! -f "${DIST_FILENAME}"  ] ; then
 fi
 
 # Unarchive and obtain the folder name
-echo "Unarchiving"
+echo "Unarchiving ${FLITE_URL}"
 tar -C "${TEMP_DIR}" -zxf "${DIST_FILENAME}"
 FLITE_PATHNAME=`find "${TEMP_DIR}" -maxdepth 1 -mindepth 1 -type d -print`
 if [ ! -d "${FLITE_PATHNAME}" ] ; then
@@ -123,7 +126,7 @@ function download_voices {
     FLITE_VOICEDIR_URL="http://cmuflite.org/packed/flite-2.1/voices"
     FLITE_TYPE=$1   
 
-    echo "Downloading ${FLITE_TYPE} voices"
+    echo "Downloading ${FLITE_TYPE}"
     cd "${PREFIX}/flite"
     install -d voices || return 4
     cd voices && curl -L -o ${FLITE_TYPE} "${FLITE_VOICEDIR_URL}/${FLITE_TYPE}" || return 4
