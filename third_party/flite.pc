@@ -1,0 +1,9 @@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Flite
+Description: CMU Flite: a small, fast run time synthesis engine
+Version: 2.1.0
+Libs: -L${libdir} -lflite
+Cflags: -I${includedir}

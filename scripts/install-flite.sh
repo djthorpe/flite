@@ -83,7 +83,7 @@ if [ ! -f "${DIST_FILENAME}"  ] ; then
 fi
 
 # Unarchive and obtain the folder name
-echo "Unarchiving ${FLITE_URL}"
+echo "unarchiving ${FLITE_URL}"
 tar -C "${TEMP_DIR}" -zxf "${DIST_FILENAME}"
 FLITE_PATHNAME=`find "${TEMP_DIR}" -maxdepth 1 -mindepth 1 -type d -print`
 if [ ! -d "${FLITE_PATHNAME}" ] ; then
@@ -147,6 +147,20 @@ fi
 if ! download_voices "indic_voices" ; then
   echo "Error downloading Indic Voices"
 fi
+
+#####################################################################
+# PKG-CONFIG
+
+cd "${PREFIX}/flite"
+install -d pkgconfig || return 5
+echo "prefix=${PREFIX}/flite" > pkgconfig/flite.pc
+
+if [ ! -f "${BASE_PATH}/third_party/flite.pc" ] ; then
+  echo "Not found: flite.pc"
+  exit 5
+fi
+
+cat "${BASE_PATH}/third_party/flite.pc" >> pkgconfig/flite.pc || exit 5
 
 #####################################################################
 # SUCESS
