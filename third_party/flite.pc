@@ -5,5 +5,5 @@ includedir=${prefix}/include
 Name: Flite
 Description: CMU Flite: a small, fast run time synthesis engine
 Version: 2.1.0
-Libs: -L${libdir} -lflite
+Libs: -L${libdir} -lflite_cmu_us_awb -lflite_usenglish -lflite_cmulex -lflite -lm
 Cflags: -I${includedir}
